@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">Svečani Trenutak</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Svečani Trenutak</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Svečani Trenutak</string>
+    <string name="action_settings">Podešavanja</string>
+
+    <string name="K_1">Muzika</string>
+    <string name="K_2">Svečane sale / restorani</string>
+    <string name="K_3">Venčanice / Svečane haljine</string>
+    <string name="K_4">Dekoracija</string>
+    <string name="K_5">Torte / Slatkiši</string>
+    <string name="K_6">Foto / Video</string>
+    <string name="K_7">Šatori / Paviljoni</string>
+    <string name="K_8">Pozivnica / Štampa</string>
+    <string name="K_9">Lepota</string>
+    <string name="K_10">Limuzine</string>
+    <string name="K_11">Osoblje</string>
+    <string name="K_12">Prenoćište za goste</string>
+    <string name="K_13">Burme / nakit</string>
+    <string name="K_14">Ketering</string>
+    <string name="K_15">Poklončići za goste</string>
+    <string name="K_16">Pića</string>
+    <string name="K_17">Igraonice</string>
+    <string name="K_18">Svečana odela</string>
+    <string name="K_19">Obuća</string>
+    <string name="K_20">Animacija</string>
+    <string name="K_21">Organizatori proslava</string>
+    <string name="K_22">Ostalo</string>
+
+    <string name="title_activity_log_in">Prijava</string>
+    <string name="title_activity_register">Kreiranje Novog Naloga</string>
+    <string name="title_activity_new_ad">Postavi Oglas</string>
+    <string name="title_activity_about_us">O Nama</string>
+    <string name="title_activity_contact">Kontakt</string>
+    <string name="title_activity_follow">Pratite Nas</string>
+    <string name="title_activity_share">Podelite</string>
+
+    <string name="aboutus1">Ideja o izradi ove aplikacije (sajta) proistekla je od nemogućnosti pronalaženja svega potrebnog za veselje.
+        Odlazak na mnogo mesta, ispisanih papira, podsetnika, adresa i brojeva telefona veliki je zamor za buduće mladence,
+        ljude koji organizuju dečije rođendane, krštenja ili pak neke druge proslave.</string>
+    <string name="aboutus2">Ovde imate sve na jednom mestu, samo par koraka na Vašem telefonu, tabletu, računaru i sve potrebne informacije o salama,
+        restoranima, muzici, salonima venčanica i svemu ostalom su pred Vama. Olakšajte pripremu Vaše proslave i u njoj uživajte uz nas.</string>
+    <string name="aboutus3">Vaš Svečani trenutak</string>
+
+    <string name="contact1">E-mail: markokarajlovic@gmail.com</string>
+
+    <string-array name="categories">
+        <item>Muzika</item>
+        <item>Svečane sale / restorani</item>
+        <item>Venčanice / Svečane haljine</item>
+        <item>Dekoracija</item>
+        <item>Torte / Slatkiši</item>
+        <item>Foto / Video</item>
+        <item>Šatori / Paviljoni</item>
+        <item>Pozivnica / Štampa</item>
+        <item>Lepota</item>
+        <item>Limuzina</item>
+        <item>Osoblje</item>
+        <item>Prenoćište za goste</item>
+        <item>Burme / nakit</item>
+        <item>Ketering</item>
+        <item>Poklončići za goste</item>
+        <item>Pića</item>
+        <item>Igraonice</item>
+        <item>Svečana odela</item>
+        <item>Obuća</item>
+        <item>Animacija</item>
+        <item>Organizatori proslava</item>
+        <item>Ostalo</item>
+    </string-array>
+
+    <string name="title_activity_list_of_ads">ListOfAdsActivity</string>
+    <string name="title_activity_view_ad">ViewAdActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="share_text"></string>
+
+    <string name="facebook_link_app">https://www.facebook.com/PhoenixInerFire</string>
+    <string name="instagram_link_app">https://www.instagram.com/markokarajlovic</string>
+    <string name="twitter_link_app"></string>
+
+    <string name="action_example">Example action</string>
+</resources>

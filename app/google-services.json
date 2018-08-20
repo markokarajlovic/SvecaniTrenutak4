@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "81761076782",
+    "firebase_url": "https://svecanitrenutak-2d5dd.firebaseio.com",
+    "project_id": "svecanitrenutak-2d5dd",
+    "storage_bucket": "svecanitrenutak-2d5dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81761076782:android:52bc93f72a43088c",
+        "android_client_info": {
+          "package_name": "com.ephoenixdev.svecanitrenutak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81761076782-mcbp94ki72gn4k8mf6frpq11nbp6tfk8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ephoenixdev.svecanitrenutak",
+            "certificate_hash": "4eb3f7fc9951edcf980d01437e6c609f3ef64982"
+          }
+        },
+        {
+          "client_id": "81761076782-4nbl2pscdpor1u76hrel1g9afgrd45dm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8-t3RuL5wfdxbi8bkLU85-vUALM0SMoI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81761076782-4nbl2pscdpor1u76hrel1g9afgrd45dm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81761076782:android:ecbd643dd4ab6f46",
+        "android_client_info": {
+          "package_name": "com.example.phoenix.svecanitrenutak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81761076782-8qe5fb5oddqm12isj4mdbcj40fk58cko.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.phoenix.svecanitrenutak",
+            "certificate_hash": "4eb3f7fc9951edcf980d01437e6c609f3ef64982"
+          }
+        },
+        {
+          "client_id": "81761076782-4nbl2pscdpor1u76hrel1g9afgrd45dm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8-t3RuL5wfdxbi8bkLU85-vUALM0SMoI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81761076782-4nbl2pscdpor1u76hrel1g9afgrd45dm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
