@@ -326,6 +326,12 @@ public class ListOfAdsActivity extends AppCompatActivity
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
 
+        } else if (id == R.id.nav_profile) {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_categories) {
+            Intent intent = new Intent(this, CategoriesActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_new_ad) {
             Intent intent = new Intent(this,NewAdActivity.class);
             startActivity(intent);
@@ -374,6 +380,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
     private void resetUI() {
 
+        navMenus.findItem(R.id.nav_profile).setVisible(false);
         navMenus.findItem(R.id.nav_log_in).setVisible(true);
         navMenus.findItem(R.id.nav_new_account).setVisible(true);
         navMenus.findItem(R.id.nav_log_out).setVisible(false);
@@ -385,6 +392,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
     private void updateUI(FirebaseUser currentUser) {
 
+        navMenus.findItem(R.id.nav_profile).setVisible(true);
         navMenus.findItem(R.id.nav_log_in).setVisible(false);
         navMenus.findItem(R.id.nav_new_account).setVisible(false);
         navMenus.findItem(R.id.nav_log_out).setVisible(true);

@@ -5,95 +5,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/nav_header_vertical_spacing"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".RegisterActivity">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/inputLayoutRegEmail"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/nav_header_vertical_spacing"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".RegisterActivity">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/editTextRegEmail"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayoutRegEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editTextRegEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/nav_header_vertical_spacing"
+                android:hint="@string/e_mail"
+                android:inputType="textEmailAddress" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayoutRegPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:helperText="Lozinka mora imati najmanje 6 karaktera">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editTextRegPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/nav_header_vertical_spacing"
+                android:hint="@string/lozinka"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayoutRegPhone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editTextRegPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/nav_header_vertical_spacing"
+                android:hint="@string/telefon"
+                android:inputType="phone" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <ImageView
+            android:id="@+id/imageViewRegProfileImg"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_margin="@dimen/nav_header_vertical_spacing"
+            android:background="#bbb9b9"
+            app:srcCompat="@drawable/ic_placeholder"
+            android:contentDescription="@string/izaberite_profilnu_sliku"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/imageViewRegProfileImg"
+            android:text="@string/izaberite_profilnu_sliku"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/buttonRegOK"
+            style="@style/ButtonThemeOk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/nav_header_vertical_spacing"
-            android:hint="E-Mail"
-            android:inputType="textEmailAddress" />
+            android:text="@string/registrujte_se" />
 
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/inputLayoutRegPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/editTextRegPassword"
+        <Button
+            android:visibility="gone"
+            android:id="@+id/buttonRegWithGoogle"
+            style="@style/ButtonThemeGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/nav_header_vertical_spacing"
-            android:hint="Lozinka"
-            android:inputType="textPassword" />
+            android:text="@string/registrujte_sa_google" />
 
-    </android.support.design.widget.TextInputLayout>
-
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/inputLayoutRegPhone"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/editTextRegPhone"
+        <Button
+            android:visibility="gone"
+            android:id="@+id/buttonRegWithFacebook"
+            style="@style/ButtonThemeFacebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/nav_header_vertical_spacing"
-            android:hint="Telefon"
-            android:inputType="phone" />
+            android:text="@string/registrujte_sa_facebook" />
 
-    </android.support.design.widget.TextInputLayout>
+        <ProgressBar
+            android:id="@+id/progressBarReg"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
 
+        <Button
+            android:id="@+id/buttonRegLogIn"
+            style="@style/ButtonThemeNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/nav_header_vertical_spacing"
+            android:text="@string/vec_imate_nalog" />
 
-    <ImageView
-        android:id="@+id/imageViewRegProfileImg"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_margin="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@drawable/side_nav_bar" />
-
-    <Button
-        android:id="@+id/buttonRegOK"
-        style="@style/ButtonThemeOk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/nav_header_vertical_spacing"
-        android:text="Registruj se" />
-
-    <ProgressBar
-        android:id="@+id/progressBarReg"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible" />
-
-    <Button
-        android:id="@+id/buttonRegLogIn"
-        style="@style/ButtonThemeNo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/nav_header_vertical_spacing"
-        android:text="Vec Imate Nalog" />
-
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

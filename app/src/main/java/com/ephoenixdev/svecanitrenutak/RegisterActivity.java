@@ -51,6 +51,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnLogIn;
     private EditText editTextPhone;
     private ImageView imageViewProfileImg;
+    private Button btnFacebook;
+    private Button btnGoogle;
 
     private Uri mImageUri;
 
@@ -61,17 +63,21 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnOK = (Button) findViewById(R.id.buttonRegOK);
-        editTextEmail = (EditText) findViewById(R.id.editTextRegEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextRegPassword);
-        progressBar = (ProgressBar) findViewById(R.id.progressBarReg);
-        btnLogIn = (Button) findViewById(R.id.buttonRegLogIn);
-        editTextPhone = (EditText) findViewById(R.id.editTextRegPhone);
+        btnOK = findViewById(R.id.buttonRegOK);
+        editTextEmail = findViewById(R.id.editTextRegEmail);
+        editTextPassword = findViewById(R.id.editTextRegPassword);
+        progressBar = findViewById(R.id.progressBarReg);
+        btnLogIn = findViewById(R.id.buttonRegLogIn);
+        editTextPhone = findViewById(R.id.editTextRegPhone);
         imageViewProfileImg = findViewById(R.id.imageViewRegProfileImg);
+
+        // TODO implementirati opcije za registraciju pomocu google i facebook
+        btnFacebook = findViewById(R.id.buttonRegWithFacebook);
+        btnGoogle = findViewById(R.id.buttonRegWithGoogle);
 
         mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference("ProfileImages");
@@ -241,7 +247,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void hideProgressDialog() {
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void showProgressDialog() {

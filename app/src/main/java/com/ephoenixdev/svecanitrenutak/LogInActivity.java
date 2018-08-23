@@ -31,35 +31,41 @@ public class LogInActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView mStatusTextView;
     private Button btnRegister;
+    private Button buttonFacebook;
+    private Button buttonGoogle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnOK = (Button) findViewById(R.id.buttonLogInOK);
-        editTextEmail = (EditText) findViewById(R.id.editTextLogInEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextLogInPassword);
-        progressBar = (ProgressBar) findViewById(R.id.progressBarLogIn);
-        mStatusTextView = (TextView) findViewById(R.id.textViewLogIn);
-        btnRegister = (Button) findViewById(R.id.buttonLogInRegister);
+        btnOK = findViewById(R.id.buttonLogInOK);
+        editTextEmail = findViewById(R.id.editTextLogInEmail);
+        editTextPassword = findViewById(R.id.editTextLogInPassword);
+        progressBar = findViewById(R.id.progressBarLogIn);
+        mStatusTextView = findViewById(R.id.textViewLogIn);
+        btnRegister = findViewById(R.id.buttonLogInRegister);
+
+        // TODO implementirati oprcije za log in pomocu google i facebook
+        buttonFacebook = findViewById(R.id.buttonLogInWithFacebook);
+        buttonGoogle = findViewById(R.id.buttonLogInWithGoogle);
 
         mAuth = FirebaseAuth.getInstance();
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn(editTextEmail.getText().toString().trim(),editTextPassword.getText().toString().trim());
+                signIn(editTextEmail.getText().toString().trim(), editTextPassword.getText().toString().trim());
             }
         });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LogInActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(LogInActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -77,7 +83,7 @@ public class LogInActivity extends AppCompatActivity {
 
     private void hideProgressDialog() {
 
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void showProgressDialog() {
@@ -127,12 +133,12 @@ public class LogInActivity extends AppCompatActivity {
                             Log.d("Logovanje", "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            Intent intent = new Intent(LogInActivity.this,MainActivity.class);
+                            Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("Logovanje", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LogInActivity.this, "Greska!",
+                            Toast.makeText(LogInActivity.this, "Greška pri logovanju!",
                                     Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
@@ -140,7 +146,7 @@ public class LogInActivity extends AppCompatActivity {
                         // [START_EXCLUDE]
                         if (!task.isSuccessful()) {
                             mStatusTextView.setVisibility(View.VISIBLE);
-                            mStatusTextView.setText("Greska!");
+                            mStatusTextView.setText(getResources().getString(R.string.neispravna_lozinka_mail));
                             btnOK.setVisibility(View.VISIBLE);
                             btnRegister.setVisibility(View.VISIBLE);
                         }
@@ -153,7 +159,6 @@ public class LogInActivity extends AppCompatActivity {
 
 
     private void updateUI(FirebaseUser currentUser) {
-
     }
 
     @Override
@@ -167,7 +172,7 @@ public class LogInActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        if(id==android.R.id.home){
+        if (id == android.R.id.home) {
             finish();
         }
 

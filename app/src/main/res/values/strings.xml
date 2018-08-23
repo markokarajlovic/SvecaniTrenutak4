@@ -85,4 +85,23 @@
     <string name="twitter_link_app"></string>
 
     <string name="action_example">Example action</string>
+    <string name="title_activity_categories">Kategorije</string>
+    <string name="title_activity_profile">Moj Profil</string>
+
+    <string name="main_1">Dobrodošli!</string>
+    <string name="main_2">Pravite malo ili veliko veselje? Na pravom ste mestu! 👍 Tu smo da Vam pomognemo u pronalaženju svega neophodnog za taj radostan dan. </string>
+    <string name="main_3">Uživajte u Vašem "Svečanom trenutku!</string>
+    <string name="nemate_nalog">Nemate Nalog</string>
+    <string name="prijavite_se">Prijavite se</string>
+    <string name="lozinka">Lozinka</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="ulogujte_se_sa_facebook">Ulogujte se sa Facebook</string>
+    <string name="ulogujte_se_sa_google">Ulogujte se sa Google</string>
+    <string name="neispravna_lozinka_mail">Neispravan e-mail ili lozinka!</string>
+    <string name="izaberite_profilnu_sliku">Izaberite profilnu sliku</string>
+    <string name="registrujte_se">Registrujte se</string>
+    <string name="vec_imate_nalog">Već Imate Nalog</string>
+    <string name="telefon">Telefon</string>
+    <string name="registrujte_sa_google">Registrujte sa Google</string>
+    <string name="registrujte_sa_facebook">Registrujte sa Facebook</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ephoenixdev.svecanitrenutak">
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -53,6 +53,14 @@
             android:name=".FollowActivity"
             android:label="@string/title_activity_follow"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".CategoriesActivity"
+            android:label="@string/title_activity_categories"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

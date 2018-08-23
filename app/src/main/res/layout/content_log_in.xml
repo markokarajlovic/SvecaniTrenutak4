@@ -8,7 +8,7 @@
     android:padding="@dimen/nav_header_vertical_spacing"
     android:visibility="visible"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".RegisterActivity">
+    tools:context=".LogInActivity">
 
 
     <android.support.design.widget.TextInputLayout
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/nav_header_vertical_spacing"
             android:inputType="textEmailAddress"
-            android:hint="E-Mail"/>
+            android:hint="@string/e_mail"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/nav_header_vertical_spacing"
-            android:hint="Lozinka"
+            android:hint="@string/lozinka"
             android:inputType="textPassword"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -56,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/nav_header_vertical_spacing"
-        android:text="Uloguj se" />
+        android:text="@string/prijavite_se" />
 
     <ProgressBar
         android:id="@+id/progressBarLogIn"
@@ -66,11 +66,29 @@
         android:visibility="invisible" />
 
     <Button
+        android:visibility="gone"
+        android:id="@+id/buttonLogInWithFacebook"
+        style="@style/ButtonThemeFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/nav_header_vertical_spacing"
+        android:text="@string/ulogujte_se_sa_facebook" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/buttonLogInWithGoogle"
+        style="@style/ButtonThemeGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/nav_header_vertical_spacing"
+        android:text="@string/ulogujte_se_sa_google" />
+
+    <Button
         android:id="@+id/buttonLogInRegister"
         style="@style/ButtonThemeNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/nav_header_vertical_spacing"
-        android:text="Nemate Nalog" />
+        android:text="@string/nemate_nalog" />
 
 </LinearLayout>
