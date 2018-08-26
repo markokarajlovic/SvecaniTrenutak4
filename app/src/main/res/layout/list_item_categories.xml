@@ -20,8 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:paddingLeft="?attr/listPreferredItemPaddingLeft"
-        android:paddingStart="?attr/listPreferredItemPaddingLeft"
         android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

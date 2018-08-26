@@ -12,4 +12,15 @@
     <string name="telefon">Telefon</string>
     <string name="registrujte_sa_google">Registrujte sa Google</string>
     <string name="registrujte_sa_facebook">Registrujte sa Facebook</string>
+    <string name="izaberite_sliku">Izaberite Sliku</string>
+    <string name="naslov_oglasa">Naslov Oglasa</string>
+    <string name="opis">Opis</string>
+    <string name="mesto">Mesto</string>
+    <string name="adresa">Adresa</string>
+    <string name="youtube_link">YouTube Link</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook_link">Facebook Link</string>
+    <string name="web_site">Web Site</string>
+    <string name="postavite_oglas">Postavite Oglas</string>
+    <string name="ponovite_lozinku">Ponovite lozinku</string>
 </resources>

@@ -5,15 +5,17 @@ public class UserModel {
         private String uid;
         private String phoneNumber;
         private boolean isAdmin;
+        private String profileImage;
 
         public UserModel(){
 
         }
 
-    public UserModel(String uid, String phoneNumber, boolean isAdmin) {
+    public UserModel(String uid, String phoneNumber, boolean isAdmin, String profileImage) {
         this.uid = uid;
         this.phoneNumber = phoneNumber;
         this.isAdmin = isAdmin;
+        this.profileImage = profileImage;
     }
 
     public String getPhoneNumber() {
@@ -38,5 +40,13 @@ public class UserModel {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }

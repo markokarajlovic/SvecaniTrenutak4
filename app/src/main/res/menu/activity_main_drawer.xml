@@ -30,6 +30,7 @@
             android:icon="@drawable/ic_nav_new_account"
             android:title="Kreiraj nalog" />
         <item
+            android:visible="false"
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_nav_search"
             android:title="Pretraga" />
@@ -51,6 +52,7 @@
                 android:icon="@drawable/ic_nav_share"
                 android:title="Podeli" />
             <item
+                android:visible="false"
                 android:id="@+id/nav_follow_us"
             android:icon="@drawable/ic_nav_follow"
                 android:title="Pratite nas" />

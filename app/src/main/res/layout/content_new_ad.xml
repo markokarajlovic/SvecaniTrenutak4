@@ -42,19 +42,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/nav_header_vertical_spacing"
-                    android:hint="Naslov Oglasa"
+                    android:hint="@string/naslov_oglasa"
                     android:inputType="text"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <Spinner
-                android:layout_margin="@dimen/nav_header_vertical_spacing"
                 android:id="@+id/spinnerNewAdCategory"
                 style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/nav_header_vertical_spacing"
+                android:layout_marginTop="@dimen/nav_header_vertical_spacing"
                 android:scrollbars="vertical" />
 
+
+            <ImageView
+                android:id="@+id/imageViewNewAd"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#bbb9b9"
+                android:contentDescription="@string/izaberite_sliku"
+                app:srcCompat="@drawable/ic_placeholder" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/imageViewNewAd"
+                android:text="@string/izaberite_sliku"
+                android:textAlignment="center" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -69,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="150dp"
                     android:layout_margin="@dimen/nav_header_vertical_spacing"
-                    android:hint="Opis"
+                    android:hint="@string/opis"
                     android:inputType="textMultiLine"
                     android:gravity="start"
                     android:textAlignment="gravity"/>
@@ -88,7 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/nav_header_vertical_spacing"
-                    android:hint="Mesto"
+                    android:hint="@string/mesto"
                     android:inputType="text" />
 
             </android.support.design.widget.TextInputLayout>
@@ -106,7 +122,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/nav_header_vertical_spacing"
-                    android:hint="Adresa"
+                    android:hint="@string/adresa"
                     android:inputType="text" />
 
             </android.support.design.widget.TextInputLayout>
@@ -123,7 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/nav_header_vertical_spacing"
-                    android:hint="YouTube Link"
+                    android:hint="@string/youtube_link"
                     android:inputType="textUri" />
 
             </android.support.design.widget.TextInputLayout>
@@ -140,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/nav_header_vertical_spacing"
-                    android:hint="Instagram"
+                    android:hint="@string/instagram"
                     android:inputType="textUri" />
 
             </android.support.design.widget.TextInputLayout>
@@ -157,7 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/nav_header_vertical_spacing"
-                    android:hint="Facebook Link"
+                    android:hint="@string/facebook_link"
                     android:inputType="textUri" />
 
             </android.support.design.widget.TextInputLayout>
@@ -174,7 +190,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/nav_header_vertical_spacing"
-                    android:hint="Web Site"
+                    android:hint="@string/web_site"
                     android:inputType="textUri" />
 
             </android.support.design.widget.TextInputLayout>
@@ -186,7 +202,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Postavi Oglas"
+                android:text="@string/postavite_oglas"
                 style="@style/ButtonThemeOk"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -5,7 +5,7 @@ import java.util.Date;
 public class AdModel {
 
     private String adId;
-    private String userID;
+    private String uid;
     private String title;
     private String category;
     private String description;
@@ -17,30 +17,26 @@ public class AdModel {
     private String personalWebSite;
     private Date dateAndTimeOfEntry;
     private Date dateAndTimeOfExpire;
+    private String imageOfTheAd;
 
     public AdModel() {
     }
 
-    public AdModel(String adId, String userID, String title, String category, String description, String cityOfAd, String address, String youTubeURL, String fbURL, String instagramURL, String personalWebSite, Date dateAndTimeOfEntry, Date dateAndTimeOfExpire) {
-        this.adId = adId;
-        this.userID = userID;
-        this.title = title;
-        this.category = category;
-        this.description = description;
-        this.cityOfAd = cityOfAd;
-        this.address = address;
-        this.youTubeURL = youTubeURL;
-        this.fbURL = fbURL;
-        this.instagramURL = instagramURL;
-        this.personalWebSite = personalWebSite;
-        this.dateAndTimeOfEntry = dateAndTimeOfEntry;
-        this.dateAndTimeOfExpire = dateAndTimeOfExpire;
-    }
-
     // bez datuma
-    public AdModel(String adId, String userID, String title, String category, String description, String cityOfAd, String address, String youTubeURL, String fbURL, String instagramURL, String personalWebSite) {
+    public AdModel(String adId,
+                   String uid,
+                   String title,
+                   String imageOfTheAd,
+                   String category,
+                   String description,
+                   String cityOfAd,
+                   String address,
+                   String youTubeURL,
+                   String fbURL,
+                   String instagramURL,
+                   String personalWebSite) {
         this.adId = adId;
-        this.userID = userID;
+        this.uid = uid;
         this.title = title;
         this.category = category;
         this.description = description;
@@ -50,6 +46,7 @@ public class AdModel {
         this.fbURL = fbURL;
         this.instagramURL = instagramURL;
         this.personalWebSite = personalWebSite;
+        this.imageOfTheAd = imageOfTheAd;
     }
 
     public String getAdId() {
@@ -61,11 +58,11 @@ public class AdModel {
     }
 
     public String getUserID() {
-        return userID;
+        return uid;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserID(String uid) {
+        this.uid = uid;
     }
 
     public String getTitle() {
@@ -154,5 +151,14 @@ public class AdModel {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+
+    public String getImageOfTheAd() {
+        return imageOfTheAd;
+    }
+
+    public void setImageOfTheAd(String imageOfTheAd) {
+        this.imageOfTheAd = imageOfTheAd;
     }
 }

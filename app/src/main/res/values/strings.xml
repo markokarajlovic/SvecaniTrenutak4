@@ -32,7 +32,7 @@
 
     <string name="title_activity_log_in">Prijava</string>
     <string name="title_activity_register">Kreiranje Novog Naloga</string>
-    <string name="title_activity_new_ad">Postavi Oglas</string>
+    <string name="title_activity_new_ad">Postavite Oglas</string>
     <string name="title_activity_about_us">O Nama</string>
     <string name="title_activity_contact">Kontakt</string>
     <string name="title_activity_follow">Pratite Nas</string>
@@ -78,7 +78,7 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
 
-    <string name="share_text"></string>
+    <string name="share_text">Za vaše proslave: https://play.google.com/store/apps/details?id=com.ephoenixdev.svecanitrenutak</string>
 
     <string name="facebook_link_app">https://www.facebook.com/PhoenixInerFire</string>
     <string name="instagram_link_app">https://www.instagram.com/markokarajlovic</string>
@@ -104,4 +104,15 @@
     <string name="telefon">Telefon</string>
     <string name="registrujte_sa_google">Registrujte sa Google</string>
     <string name="registrujte_sa_facebook">Registrujte sa Facebook</string>
+    <string name="izaberite_sliku">Izaberite Sliku</string>
+    <string name="naslov_oglasa">Naslov Oglasa</string>
+    <string name="opis">Opis</string>
+    <string name="mesto">Mesto</string>
+    <string name="adresa">Adresa</string>
+    <string name="youtube_link">YouTube Link</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook_link">Facebook Link</string>
+    <string name="web_site">Web Site</string>
+    <string name="postavite_oglas">Postavite Oglas</string>
+    <string name="ponovite_lozinku">Ponovite lozinku</string>
 </resources>

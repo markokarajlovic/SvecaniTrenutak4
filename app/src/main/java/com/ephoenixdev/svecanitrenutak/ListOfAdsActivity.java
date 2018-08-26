@@ -1,7 +1,9 @@
 package com.ephoenixdev.svecanitrenutak;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,11 +15,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ephoenixdev.svecanitrenutak.lists.ListOfAdsAdapter;
 import com.ephoenixdev.svecanitrenutak.models.AdModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +31,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +49,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
     public Menu navMenus;
     public View headerLayout;
-
+    private ProgressBar progressBar;
     String categoryName;
 
     long idCategory;
@@ -49,18 +58,20 @@ public class ListOfAdsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_ads);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        progressBar = findViewById(R.id.progressBarListOfAds);
 
         navMenus = navigationView.getMenu();
         headerLayout = navigationView.getHeaderView(0);
@@ -97,6 +108,8 @@ public class ListOfAdsActivity extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
+
         };
 
         if (idCategory == 1) {
@@ -283,7 +296,6 @@ public class ListOfAdsActivity extends AppCompatActivity
 
             }
         });
-
     }
 
     @Override
@@ -301,7 +313,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -373,7 +385,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -385,20 +397,39 @@ public class ListOfAdsActivity extends AppCompatActivity
         navMenus.findItem(R.id.nav_new_account).setVisible(true);
         navMenus.findItem(R.id.nav_log_out).setVisible(false);
 
-        TextView text = (TextView) headerLayout.findViewById(R.id.nav_header_name);
+        TextView text = headerLayout.findViewById(R.id.nav_header_name);
+        ImageView imageView = headerLayout.findViewById(R.id.nav_header_imageView);
+
         text.setText(R.string.nav_header_title);
+        imageView.setImageResource(R.mipmap.ic_launcher_round);
 
     }
 
     private void updateUI(FirebaseUser currentUser) {
 
-        navMenus.findItem(R.id.nav_profile).setVisible(true);
+        //navMenus.findItem(R.id.nav_profile).setVisible(true);
         navMenus.findItem(R.id.nav_log_in).setVisible(false);
         navMenus.findItem(R.id.nav_new_account).setVisible(false);
         navMenus.findItem(R.id.nav_log_out).setVisible(true);
 
-        TextView text = (TextView) headerLayout.findViewById(R.id.nav_header_name);
+        TextView text = headerLayout.findViewById(R.id.nav_header_name);
+        final ImageView imageView = headerLayout.findViewById(R.id.nav_header_imageView);
+
         text.setText(currentUser.getEmail().toString());
+
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("ProfileImages/" + currentUser.getUid() + "/profileImage.jpg");
+
+        mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).fit().into(imageView);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
 
     }
 
@@ -418,5 +449,15 @@ public class ListOfAdsActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void hideProgressDialog() {
+
+        progressBar.setVisibility(View.GONE);
+    }
+
+    private void showProgressDialog() {
+
+        progressBar.setVisibility(View.VISIBLE);
     }
 }

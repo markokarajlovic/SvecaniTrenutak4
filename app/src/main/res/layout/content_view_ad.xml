@@ -1,119 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ViewAdActivity">
+    tools:context=".ViewAdActivity" >
 
 
-    <TextView
-        android:id="@+id/textViewViewAdTitle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView" />
+        android:layout_height="match_parent"
+        android:id="@+id/scrollViewViewAd">
 
-
-    <LinearLayout
-        android:id="@+id/linearLayoutViewAdActions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/imageButtonViewAdReport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Report" />
-
-        <Button
-            android:id="@+id/imageButtonViewAdMap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Map" />
-
-        <Button
-            android:id="@+id/imageButtonViewAdCall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Call" />
-
-        <Button
-            android:id="@+id/imageButtonViewAdWebSite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Web Site" />
-
-        <Button
-            android:id="@+id/imageButtonViewAdShare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Share" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayoutViewAdSocialNetworks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/imageButtonViewAdInstagram"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Instagram" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/imageButtonViewAdYoutube"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Youtube" />
+            <TextView
+                android:id="@+id/textViewViewAdTitle"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Title"
+                android:textAlignment="center"
+                android:textAllCaps="true" />
 
-        <Button
-            android:id="@+id/imageButtonViewAdFacebook"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Facebook" />
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3" >
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/buttonViewAdInstagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instagram"
+                    android:layout_weight="1"/>
 
-    <ImageView
-        android:id="@+id/imageViewViewAd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/side_nav_bar" />
+                <Button
+                    android:id="@+id/buttonViewAdYoutube"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Youtube"
+                    android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/textViewViewAdDiscription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFF200"
-        android:text="Neki text opis bala bla" />
+                <Button
+                    android:id="@+id/buttonViewAdFacebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Facebook"
+                    android:layout_weight="1"/>
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/textViewViewAd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Opis Oglasa"
-        android:textAllCaps="true" />
+            <ImageView
+                android:id="@+id/imageViewViewAd"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/side_nav_bar" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/textViewViewAdDisc"
+                style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Opis Oglasa"
+                android:textAlignment="center"
+                android:textAllCaps="true" />
+
+            <TextView
+                android:id="@+id/textViewViewAdDiscription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:text="TextView"
+                android:textAlignment="gravity"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                android:background="#FFFFFF"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/linearLayoutViewAdActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="5">
+
+                <Button
+                    android:id="@+id/buttonViewAdReport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Report"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/buttonViewAdCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="City"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/buttonViewAdCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Call"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/buttonViewAdWebsite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Web"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/buttonViewAdShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Share" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

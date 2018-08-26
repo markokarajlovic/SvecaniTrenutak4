@@ -7,8 +7,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,13 +25,19 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ephoenixdev.svecanitrenutak.lists.CategoryAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class CategoriesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -195,19 +203,38 @@ public class CategoriesActivity extends AppCompatActivity
         navMenus.findItem(R.id.nav_log_out).setVisible(false);
 
         TextView text = headerLayout.findViewById(R.id.nav_header_name);
+        ImageView imageView = headerLayout.findViewById(R.id.nav_header_imageView);
+
         text.setText(R.string.nav_header_title);
+        imageView.setImageResource(R.mipmap.ic_launcher_round);
 
     }
 
     private void updateUI(FirebaseUser currentUser) {
 
-        navMenus.findItem(R.id.nav_profile).setVisible(true);
+        //navMenus.findItem(R.id.nav_profile).setVisible(true);
         navMenus.findItem(R.id.nav_log_in).setVisible(false);
         navMenus.findItem(R.id.nav_new_account).setVisible(false);
         navMenus.findItem(R.id.nav_log_out).setVisible(true);
 
         TextView text = headerLayout.findViewById(R.id.nav_header_name);
+        final ImageView imageView = headerLayout.findViewById(R.id.nav_header_imageView);
+
         text.setText(currentUser.getEmail().toString());
+
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("ProfileImages/" + currentUser.getUid() + "/profileImage.jpg");
+
+        mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).fit().into(imageView);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
 
     }
 

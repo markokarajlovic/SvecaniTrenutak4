@@ -1,7 +1,11 @@
 package com.ephoenixdev.svecanitrenutak;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,20 +15,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ephoenixdev.svecanitrenutak.models.ImageUpload;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ephoenixdev.svecanitrenutak.models.AdModel;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
 
 public class NewAdActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnItemSelectedListener {
@@ -34,33 +50,43 @@ public class NewAdActivity extends AppCompatActivity
     public Menu navMenus;
     public View headerLayout;
 
-    DatabaseReference databaseAd;
-    EditText EditTitleOfAd;
-    Spinner spinnerCategories;
-    EditText EditDiscriptionOfAd;
-    EditText EditCityOfAd;
-    EditText EditAddressOfAd;
-    EditText EditYoutubeLinkOfAd;
-    EditText EditInstagramOfAd;
-    EditText EditFacebookLinkOfAd;
-    EditText EditWebsiteOfAd;
-    Button btnOK;
+    private StorageReference mStorageRef;
+    private StorageTask mUploadTask;
+
+    private DatabaseReference databaseAd;
+    private EditText EditTitleOfAd;
+    private Spinner spinnerCategories;
+    private EditText EditDiscriptionOfAd;
+    private EditText EditCityOfAd;
+    private EditText EditAddressOfAd;
+    private EditText EditYoutubeLinkOfAd;
+    private EditText EditInstagramOfAd;
+    private EditText EditFacebookLinkOfAd;
+    private EditText EditWebsiteOfAd;
+    private Button btnOK;
+    private ImageView imageView;
+
+    private Uri mImageUri;
+
+    private String idAd;
+
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_ad);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         navMenus = navigationView.getMenu();
@@ -70,16 +96,19 @@ public class NewAdActivity extends AppCompatActivity
 
         databaseAd = FirebaseDatabase.getInstance().getReference("Ad");
 
-        btnOK = (Button) findViewById(R.id.buttonNewAdAdd);
-        EditTitleOfAd = (EditText) findViewById(R.id.editTextNewAdTitle);
-        spinnerCategories = (Spinner) findViewById(R.id.spinnerNewAdCategory);
-        EditDiscriptionOfAd = (EditText) findViewById(R.id.editTextNewAdDiscription);
-        EditCityOfAd = (EditText) findViewById(R.id.editTextNewAdCity);
-        EditAddressOfAd = (EditText) findViewById(R.id.editTextNewAdAdress);
-        EditYoutubeLinkOfAd = (EditText) findViewById(R.id.editTextNewAdYouTube);
-        EditInstagramOfAd = (EditText) findViewById(R.id.editTextNewAdInstagram);
-        EditFacebookLinkOfAd = (EditText) findViewById(R.id.editTextNewAdFacebook);
-        EditWebsiteOfAd = (EditText) findViewById(R.id.editTextNewAdWebSite);
+        btnOK = findViewById(R.id.buttonNewAdAdd);
+        EditTitleOfAd = findViewById(R.id.editTextNewAdTitle);
+        spinnerCategories = findViewById(R.id.spinnerNewAdCategory);
+        EditDiscriptionOfAd = findViewById(R.id.editTextNewAdDiscription);
+        EditCityOfAd = findViewById(R.id.editTextNewAdCity);
+        EditAddressOfAd = findViewById(R.id.editTextNewAdAdress);
+        EditYoutubeLinkOfAd = findViewById(R.id.editTextNewAdYouTube);
+        EditInstagramOfAd = findViewById(R.id.editTextNewAdInstagram);
+        EditFacebookLinkOfAd = findViewById(R.id.editTextNewAdFacebook);
+        EditWebsiteOfAd = findViewById(R.id.editTextNewAdWebSite);
+        imageView = findViewById(R.id.imageViewNewAd);
+
+        mStorageRef = FirebaseStorage.getInstance().getReference("AdImages");
 
         ArrayAdapter<CharSequence> spinerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.categories, android.R.layout.simple_spinner_item);
@@ -95,6 +124,73 @@ public class NewAdActivity extends AppCompatActivity
             }
         });
 
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFileChooser();
+            }
+        });
+
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+
+            Picasso.get().load(mImageUri).into(imageView);
+
+        }
+    }
+
+    private void uploadFile() {
+        if (mImageUri != null) {
+            StorageReference fileReference = mStorageRef.child(idAd+"/ad_image_1." + getFileExtension(mImageUri));
+            mUploadTask = fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                }
+                            }, 500);
+
+                            Toast.makeText(NewAdActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(NewAdActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void addAd() {
@@ -106,9 +202,10 @@ public class NewAdActivity extends AppCompatActivity
             Toast.makeText(NewAdActivity.this, "Ulogujte se prvo!", Toast.LENGTH_SHORT).show();
         }else {
 
-            String idAd = databaseAd.push().getKey();
+            idAd = databaseAd.push().getKey();
             String idUser = currentUser.getUid().toString();
             String titleOfAd = EditTitleOfAd.getText().toString().trim();
+            String imageOfAd = "ad_image_1." + getFileExtension(mImageUri);
             String categoryOfAd = spinnerCategories.getSelectedItem().toString();
             String discriptionOfAd = EditDiscriptionOfAd.getText().toString().trim();
             String cityOfAd = EditCityOfAd.getText().toString().trim();
@@ -122,6 +219,7 @@ public class NewAdActivity extends AppCompatActivity
                     idAd,
                     idUser,
                     titleOfAd,
+                    imageOfAd,
                     categoryOfAd,
                     discriptionOfAd,
                     cityOfAd,
@@ -132,6 +230,14 @@ public class NewAdActivity extends AppCompatActivity
                     websiteOfAd);
 
             databaseAd.child(idAd).setValue(am);
+
+            // upload img
+            if (mUploadTask != null && mUploadTask.isInProgress()) {
+                Toast.makeText(NewAdActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+            } else {
+                uploadFile();
+            }
+
             postavljen = true;
         }
 
@@ -152,7 +258,7 @@ public class NewAdActivity extends AppCompatActivity
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
-
+            Toast.makeText(this,"Morate se ulogovati pre postavke oglasa",Toast.LENGTH_LONG).show();
         }else {
             updateUI(currentUser);
         }
@@ -160,7 +266,7 @@ public class NewAdActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -250,7 +356,7 @@ public class NewAdActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -262,20 +368,39 @@ public class NewAdActivity extends AppCompatActivity
         navMenus.findItem(R.id.nav_new_account).setVisible(true);
         navMenus.findItem(R.id.nav_log_out).setVisible(false);
 
-        TextView text = (TextView) headerLayout.findViewById(R.id.nav_header_name);
+        TextView text = headerLayout.findViewById(R.id.nav_header_name);
+        ImageView imageView = headerLayout.findViewById(R.id.nav_header_imageView);
+
         text.setText(R.string.nav_header_title);
+        imageView.setImageResource(R.mipmap.ic_launcher_round);
 
     }
 
     private void updateUI(FirebaseUser currentUser) {
 
-        navMenus.findItem(R.id.nav_profile).setVisible(true);
+        //navMenus.findItem(R.id.nav_profile).setVisible(true);
         navMenus.findItem(R.id.nav_log_in).setVisible(false);
         navMenus.findItem(R.id.nav_new_account).setVisible(false);
         navMenus.findItem(R.id.nav_log_out).setVisible(true);
 
-        TextView text = (TextView) headerLayout.findViewById(R.id.nav_header_name);
+        TextView text = headerLayout.findViewById(R.id.nav_header_name);
+        final ImageView imageView = headerLayout.findViewById(R.id.nav_header_imageView);
+
         text.setText(currentUser.getEmail().toString());
+
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("ProfileImages/" + currentUser.getUid() + "/profileImage.jpg");
+
+        mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).fit().into(imageView);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
 
     }
 

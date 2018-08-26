@@ -41,12 +41,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private StorageReference mStorageRef;
-    private DatabaseReference mDatabaseRef;
     private StorageTask mUploadTask;
 
     private Button btnOK;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private EditText editTextPassword1;
     private ProgressBar progressBar;
     private Button btnLogIn;
     private EditText editTextPhone;
@@ -70,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnOK = findViewById(R.id.buttonRegOK);
         editTextEmail = findViewById(R.id.editTextRegEmail);
         editTextPassword = findViewById(R.id.editTextRegPassword);
+        editTextPassword1 = findViewById(R.id.editTextRegPassword1);
         progressBar = findViewById(R.id.progressBarReg);
         btnLogIn = findViewById(R.id.buttonRegLogIn);
         editTextPhone = findViewById(R.id.editTextRegPhone);
@@ -81,7 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference("ProfileImages");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("ProfileImages");
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void uploadFile() {
         if (mImageUri != null) {
-            StorageReference fileReference = mStorageRef.child(currentUser.getUid()+"/profile." + getFileExtension(mImageUri));
+            StorageReference fileReference = mStorageRef.child(currentUser.getUid()+"/profileImage." + getFileExtension(mImageUri));
 
             mUploadTask = fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -131,11 +131,10 @@ public class RegisterActivity extends AppCompatActivity {
                             }, 500);
 
                             Toast.makeText(RegisterActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            ImageUpload upload = new ImageUpload("profile_img",
-                                    taskSnapshot.getUploadSessionUri().toString());
+
                             currentUser = mAuth.getCurrentUser();
-                            String uploadId = currentUser.getUid();
-                            mDatabaseRef.child(uploadId).setValue(upload);
+
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -240,8 +239,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         String phoneNumber = editTextPhone.getText().toString();
         boolean isAdmin = false;
+        String profileImage = "profileImage." + getFileExtension(mImageUri);;
 
-        UserModel um = new UserModel(currentUser.getUid().toString(),phoneNumber,isAdmin);
+        UserModel um = new UserModel(currentUser.getUid().toString(),phoneNumber,isAdmin, profileImage);
         databaseUser.child(currentUser.getUid()).setValue(um);
 
     }
@@ -258,11 +258,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean validateForm() {
+
         boolean valid = true;
 
         String email = editTextEmail.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("Required.");
+            editTextEmail.setError("Obavezno polje.");
             valid = false;
         } else {
             editTextEmail.setError(null);
@@ -270,10 +271,23 @@ public class RegisterActivity extends AppCompatActivity {
 
         String password = editTextPassword.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Required.");
+            editTextPassword.setError("Obavezno polje.");
             valid = false;
         } else {
             editTextPassword.setError(null);
+        }
+
+        String password1 = editTextPassword1.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            editTextPassword1.setError("Obavezno polje.");
+            valid = false;
+        } else {
+            editTextPassword1.setError(null);
+        }
+
+        if(password == password1){
+            valid = false;
+            editTextPassword1.setError("Lozinke moraju biti iste!");
         }
 
         return valid;
