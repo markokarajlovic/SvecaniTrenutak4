@@ -21,8 +21,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -34,6 +32,8 @@ public class MainActivity extends AppCompatActivity
 
     public Menu navMenus;
     public View headerLayout;
+
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
 
         if(currentUser == null){
 
@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity
             mAuth.signOut();
             resetUI();
             Toast.makeText(MainActivity.this, "Izlogovani ste", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
 
         } else if (id == R.id.nav_about_us) {
             Intent intent = new Intent(this,AboutUsActivity.class);
@@ -184,7 +185,7 @@ public class MainActivity extends AppCompatActivity
 
     private void updateUI(FirebaseUser currentUser) {
 
-        //navMenus.findItem(R.id.nav_profile).setVisible(true);
+        navMenus.findItem(R.id.nav_profile).setVisible(true);
         navMenus.findItem(R.id.nav_log_in).setVisible(false);
         navMenus.findItem(R.id.nav_new_account).setVisible(false);
         navMenus.findItem(R.id.nav_log_out).setVisible(true);

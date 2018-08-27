@@ -57,11 +57,12 @@
         <activity
             android:name=".CategoriesActivity"
             android:label="@string/title_activity_categories"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UserAdsActivity"></activity>
     </application>
 
 </manifest>

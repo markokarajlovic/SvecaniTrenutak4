@@ -5,7 +5,7 @@ import java.util.Date;
 public class AdModel {
 
     private String adId;
-    private String uid;
+    private String userID;
     private String title;
     private String category;
     private String description;
@@ -24,7 +24,7 @@ public class AdModel {
 
     // bez datuma
     public AdModel(String adId,
-                   String uid,
+                   String userID,
                    String title,
                    String imageOfTheAd,
                    String category,
@@ -36,7 +36,7 @@ public class AdModel {
                    String instagramURL,
                    String personalWebSite) {
         this.adId = adId;
-        this.uid = uid;
+        this.userID = userID;
         this.title = title;
         this.category = category;
         this.description = description;
@@ -58,11 +58,11 @@ public class AdModel {
     }
 
     public String getUserID() {
-        return uid;
+        return userID;
     }
 
     public void setUserID(String uid) {
-        this.uid = uid;
+        this.userID = uid;
     }
 
     public String getTitle() {

@@ -181,12 +181,6 @@ public class NewAdActivity extends AppCompatActivity
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(NewAdActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                        }
                     });
         } else {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();

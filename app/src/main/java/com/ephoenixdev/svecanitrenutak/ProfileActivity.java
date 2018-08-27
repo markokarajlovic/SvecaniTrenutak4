@@ -1,37 +1,72 @@
 package com.ephoenixdev.svecanitrenutak;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ephoenixdev.svecanitrenutak.lists.ListOfAdsProfileAdapter;
+import com.ephoenixdev.svecanitrenutak.models.AdModel;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth mAuth;
+    StorageReference mStorageRef;
+    StorageTask mUploadTask;
 
     public Menu navMenus;
     public View headerLayout;
+    private ImageView imageView;
+    private Button btnOk, btnOKPic, btnAds;
+    private TextInputLayout textInputLayout;
+    private EditText editTextPassword;
+
+
+
+    private static final int PICK_IMAGE_REQUEST = 1;
+    private boolean pictureChanged = false;
+    FirebaseUser currentUser;
+    private Uri mImageUri;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +89,137 @@ public class ProfileActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
+        btnOk = findViewById(R.id.buttonProfileOK);
+        btnOKPic = findViewById(R.id.buttonProfileOKPicture);
+        btnAds = findViewById(R.id.buttonProfileUserAds);
+        textInputLayout = findViewById(R.id.inputLayoutProfilePassword);
+        editTextPassword = findViewById(R.id.editTextProfilePassword);
+        imageView = findViewById(R.id.imageViewProfileImg);
 
+        btnAds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, UserAdsActivity.class);
+                userId = currentUser.getUid().toString();
+                intent.putExtra("userId",userId);
+                startActivity(intent);
+            }
+        });
+
+
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePassword(editTextPassword.getText().toString().trim());
+            }
+        });
+
+        btnOKPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changePicture(pictureChanged);
+            }
+        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFileChooser();
+
+            }
+        });
+
+
+    }
+
+    private void changePassword(final String newPassword) {
+
+        if (!validateForm()) {
+            return;
+        }
+        currentUser.updatePassword(newPassword).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(ProfileActivity.this,"Uspesna promena", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private boolean validateForm() {
+
+        boolean valid = true;
+
+        String password = editTextPassword.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            editTextPassword.setError("Obavezno polje.");
+            valid = false;
+        } else {
+            editTextPassword.setError(null);
+        }
+
+        return valid;
+    }
+
+    private void changePicture(boolean pictureChanged) {
+
+        if(pictureChanged == true){
+            if (mImageUri != null) {
+                StorageReference fileReference = mStorageRef.child(currentUser.getUid()+"/profileImage." + getFileExtension(mImageUri));
+
+                    mUploadTask = fileReference.putFile(mImageUri)
+                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(ProfileActivity.this, "Slika promenjena", Toast.LENGTH_LONG).show();
+                            currentUser = mAuth.getCurrentUser();
+
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(ProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+            } else {
+                Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+
+            Picasso.get().load(mImageUri).into(imageView);
+
+        }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
 
         if(currentUser == null){
 
@@ -187,7 +345,7 @@ public class ProfileActivity extends AppCompatActivity
         navMenus.findItem(R.id.nav_log_out).setVisible(true);
 
         TextView text = headerLayout.findViewById(R.id.nav_header_name);
-        final ImageView imageView = headerLayout.findViewById(R.id.nav_header_imageView);
+        final ImageView imageViewHeader = headerLayout.findViewById(R.id.nav_header_imageView);
 
         text.setText(currentUser.getEmail().toString());
 
@@ -196,7 +354,7 @@ public class ProfileActivity extends AppCompatActivity
         mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).fit().into(imageView);
+                Picasso.get().load(uri).fit().into(imageViewHeader);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

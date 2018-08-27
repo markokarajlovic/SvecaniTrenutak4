@@ -115,4 +115,7 @@
     <string name="web_site">Web Site</string>
     <string name="postavite_oglas">Postavite Oglas</string>
     <string name="ponovite_lozinku">Ponovite lozinku</string>
+    <string name="promenite_lozinku">Promenite lozinku</string>
+    <string name="potvrdite_promene">Potvrdite promene</string>
+    <string name="promenite_sliku">Promenite sliku</string>
 </resources>

@@ -8,4 +8,71 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ProfileActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayoutProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="top|center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageViewProfileImg"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/ic_placeholder" />
+
+        <Button
+            android:id="@+id/buttonProfileOKPicture"
+            style="@style/ButtonThemeOk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/nav_header_vertical_spacing"
+            android:layout_weight="1"
+            android:text="@string/promenite_sliku" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayoutProfilePassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editTextProfilePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/nav_header_vertical_spacing"
+                android:hint="@string/promenite_lozinku"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonProfileOK"
+            style="@style/ButtonThemeOk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/nav_header_vertical_spacing"
+            android:layout_weight="1"
+            android:text="@string/potvrdite_promene" />
+
+        <Button
+            android:id="@+id/buttonProfileUserAds"
+            style="@style/ButtonThemeOk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/nav_header_vertical_spacing"
+            android:layout_weight="1"
+            android:text="Moji Oglasi" />
+
+    </LinearLayout>
+
+
+
 </android.support.constraint.ConstraintLayout>
