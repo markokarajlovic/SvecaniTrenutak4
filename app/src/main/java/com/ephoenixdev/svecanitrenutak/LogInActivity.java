@@ -96,7 +96,7 @@ public class LogInActivity extends AppCompatActivity {
 
         String email = editTextEmail.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("Required.");
+            editTextEmail.setError("Obavezno polje");
             valid = false;
         } else {
             editTextEmail.setError(null);
@@ -104,7 +104,7 @@ public class LogInActivity extends AppCompatActivity {
 
         String password = editTextPassword.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Required.");
+            editTextPassword.setError("Obavezno polje");
             valid = false;
         } else {
             editTextPassword.setError(null);

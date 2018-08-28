@@ -19,7 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.os.Handler;
 
-import com.ephoenixdev.svecanitrenutak.models.ImageUpload;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -238,9 +237,15 @@ public class RegisterActivity extends AppCompatActivity {
         databaseUser = FirebaseDatabase.getInstance().getReference("User");
 
         String phoneNumber = editTextPhone.getText().toString();
+        String profileImage;
         boolean isAdmin = false;
-        String profileImage = "profileImage." + getFileExtension(mImageUri);;
+        if (mImageUri != null) {
+            profileImage = "profileImage." + getFileExtension(mImageUri);
 
+        }else
+        {
+            profileImage = "";
+        }
         UserModel um = new UserModel(currentUser.getUid().toString(),phoneNumber,isAdmin, profileImage);
         databaseUser.child(currentUser.getUid()).setValue(um);
 

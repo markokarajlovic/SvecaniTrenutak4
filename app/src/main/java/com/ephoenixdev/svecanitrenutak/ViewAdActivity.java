@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -33,15 +35,19 @@ import com.squareup.picasso.Picasso;
 public class ViewAdActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private StorageReference mStorageRef;
+
+    private DatabaseReference databaseAd;
+    FirebaseUser currentUser;
     public Menu navMenus;
     public View headerLayout;
     private TextView viewTitle, viewDiscription;
     private ImageView imageView;
-    private Button btnInstagram, btnYoutube, btnFacebook, btnReport, btnCity, btnCall, btnWebsite, btnShare;
+    private Button btnInstagram, btnYoutube, btnFacebook, btnReport, btnCity, btnCall, btnWebsite, btnShare, btnDelete;
     private FirebaseAuth mAuth;
-    private StorageReference mStorageRef;
-    private String userId, adId, title, city, discription, fbURL, instgramURL, youtubeURL, webSite, adress, category, imageOfAd;
+    private String userId, adId, title, city, discription, fbURL, instgramURL, youtubeURL, webSite, adress, category, imageOfAd, phone;
     private static final int REQUEST_CALL = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,8 @@ public class ViewAdActivity extends AppCompatActivity
         headerLayout = navigationView.getHeaderView(0);
 
         mAuth = FirebaseAuth.getInstance();
+
+        btnDelete = findViewById(R.id.buttonViewAdDelete);
 
         viewTitle = findViewById(R.id.textViewViewAdTitle);
         viewDiscription = findViewById(R.id.textViewViewAdDiscription);
@@ -93,9 +101,17 @@ public class ViewAdActivity extends AppCompatActivity
         viewTitle.setText(title);
         viewDiscription.setText(discription);
 
+
         setImageOfAd (adId, imageOfAd);
 
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO
 
+                deleteAd(adId,userId);
+            }
+        });
 
         btnInstagram.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +170,21 @@ public class ViewAdActivity extends AppCompatActivity
         });
     }
 
+    private void deleteAd(String adId, String userId) {
+
+        if(currentUser.getUid().toString().equals(userId)) {
+
+            mStorageRef = FirebaseStorage.getInstance().getReference("AdImages/" + adId + "/" + imageOfAd);
+            databaseAd = FirebaseDatabase.getInstance().getReference("Ad");
+
+            databaseAd.child(adId).removeValue();
+            mStorageRef.delete();
+
+            finish();
+
+        }
+    }
+
     private void makePhoneCall() {
             String number = "0643609543";
             if (number.trim().length() > 0) {
@@ -206,18 +237,24 @@ public class ViewAdActivity extends AppCompatActivity
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
+
+        if(currentUser.getUid().toString().equals(userId)){
+            btnDelete.setVisibility(View.VISIBLE);
+
+        }else btnDelete.setVisibility(View.INVISIBLE);
 
         if(currentUser == null){
 
         }else {
             updateUI(currentUser);
+
         }
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -284,6 +321,7 @@ public class ViewAdActivity extends AppCompatActivity
             mAuth.signOut();
             resetUI();
             Toast.makeText(ViewAdActivity.this, "Izlogovani ste", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
 
         } else if (id == R.id.nav_about_us) {
             Intent intent = new Intent(this,AboutUsActivity.class);
@@ -295,6 +333,7 @@ public class ViewAdActivity extends AppCompatActivity
             String text = getResources().getString(R.string.share_text);
             intent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
             intent.putExtra(Intent.EXTRA_TEXT, text);
+
             startActivity(Intent.createChooser(intent, "Izaberite"));
 
         } else if (id == R.id.nav_follow_us) {
@@ -307,7 +346,7 @@ public class ViewAdActivity extends AppCompatActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -329,7 +368,7 @@ public class ViewAdActivity extends AppCompatActivity
 
     private void updateUI(FirebaseUser currentUser) {
 
-        //navMenus.findItem(R.id.nav_profile).setVisible(true);
+        navMenus.findItem(R.id.nav_profile).setVisible(true);
         navMenus.findItem(R.id.nav_log_in).setVisible(false);
         navMenus.findItem(R.id.nav_new_account).setVisible(false);
         navMenus.findItem(R.id.nav_log_out).setVisible(true);

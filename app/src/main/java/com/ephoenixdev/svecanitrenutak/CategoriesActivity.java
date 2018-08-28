@@ -1,14 +1,7 @@
 package com.ephoenixdev.svecanitrenutak;
 
-import android.app.Activity;
-
-import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -16,15 +9,11 @@ import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -67,6 +56,20 @@ public class CategoriesActivity extends AppCompatActivity
         headerLayout = navigationView.getHeaderView(0);
 
         mAuth = FirebaseAuth.getInstance();
+
+        createList();
+
+
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        createList();
+    }
+
+    private void createList() {
 
         // Kreiranje liste
         ListView listView= findViewById(R.id.listViewMain);
@@ -167,6 +170,7 @@ public class CategoriesActivity extends AppCompatActivity
             mAuth.signOut();
             resetUI();
             Toast.makeText(CategoriesActivity.this, "Izlogovani ste", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
 
         } else if (id == R.id.nav_about_us) {
             Intent intent = new Intent(this,AboutUsActivity.class);
@@ -178,6 +182,7 @@ public class CategoriesActivity extends AppCompatActivity
             String text = getResources().getString(R.string.share_text);
             intent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
             intent.putExtra(Intent.EXTRA_TEXT, text);
+
             startActivity(Intent.createChooser(intent, "Izaberite"));
 
         } else if (id == R.id.nav_follow_us) {
@@ -212,7 +217,7 @@ public class CategoriesActivity extends AppCompatActivity
 
     private void updateUI(FirebaseUser currentUser) {
 
-        //navMenus.findItem(R.id.nav_profile).setVisible(true);
+        navMenus.findItem(R.id.nav_profile).setVisible(true);
         navMenus.findItem(R.id.nav_log_in).setVisible(false);
         navMenus.findItem(R.id.nav_new_account).setVisible(false);
         navMenus.findItem(R.id.nav_log_out).setVisible(true);
@@ -237,5 +242,4 @@ public class CategoriesActivity extends AppCompatActivity
         });
 
     }
-
 }

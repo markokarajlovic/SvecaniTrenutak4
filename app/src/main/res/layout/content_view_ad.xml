@@ -77,13 +77,21 @@
 
             <TextView
                 android:id="@+id/textViewViewAdDiscription"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#FFFFFF"
                 android:gravity="top|left"
-                android:text="TextView"
-                android:textAlignment="gravity"
-                style="@style/TextAppearance.MaterialComponents.Subtitle2"
-                android:background="#FFFFFF"/>
+                android:textAlignment="gravity" />
+
+            <Button
+                android:id="@+id/buttonViewAdDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_red_dark"
+                android:text="Obrisi Oglas !"
+                android:textColor="@android:color/background_dark"
+                android:visibility="invisible" />
 
             <LinearLayout
                 android:visibility="gone"

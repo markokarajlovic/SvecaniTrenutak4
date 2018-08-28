@@ -20,8 +20,8 @@ public class FollowActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        imgFacebook = (ImageView) findViewById(R.id.imageViewFollowFacebook);
-        imgInstagram = (ImageView) findViewById(R.id.imageViewFollowInstagram);
+        imgFacebook = findViewById(R.id.imageViewFollowFacebook);
+        imgInstagram = findViewById(R.id.imageViewFollowInstagram);
 
         imgFacebook.setOnClickListener(new View.OnClickListener() {
             @Override

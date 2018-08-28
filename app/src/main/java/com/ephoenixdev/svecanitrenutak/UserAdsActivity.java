@@ -4,9 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.ephoenixdev.svecanitrenutak.lists.ListOfAdsProfileAdapter;
 import com.ephoenixdev.svecanitrenutak.models.AdModel;
@@ -48,7 +48,6 @@ public class UserAdsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
             userId = bundle.getString("userId");
-            Toast.makeText(UserAdsActivity.this,""+userId, Toast.LENGTH_LONG).show();
         }
 
         ValueEventListener valueEventListener = new ValueEventListener() {

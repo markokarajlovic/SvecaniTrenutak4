@@ -11,8 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -25,26 +23,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ephoenixdev.svecanitrenutak.lists.ListOfAdsProfileAdapter;
-import com.ephoenixdev.svecanitrenutak.models.AdModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -293,7 +282,8 @@ public class ProfileActivity extends AppCompatActivity
         } else if (id == R.id.nav_log_out) {
             mAuth.signOut();
             resetUI();
-            Toast.makeText(this, "Izlogovani ste", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, "Izlogovani ste", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
 
         } else if (id == R.id.nav_about_us) {
             Intent intent = new Intent(this,AboutUsActivity.class);
@@ -305,6 +295,7 @@ public class ProfileActivity extends AppCompatActivity
             String text = getResources().getString(R.string.share_text);
             intent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
             intent.putExtra(Intent.EXTRA_TEXT, text);
+
             startActivity(Intent.createChooser(intent, "Izaberite"));
 
         } else if (id == R.id.nav_follow_us) {
@@ -339,7 +330,7 @@ public class ProfileActivity extends AppCompatActivity
 
     private void updateUI(FirebaseUser currentUser) {
 
-        //navMenus.findItem(R.id.nav_profile).setVisible(true);
+        navMenus.findItem(R.id.nav_profile).setVisible(true);
         navMenus.findItem(R.id.nav_log_in).setVisible(false);
         navMenus.findItem(R.id.nav_new_account).setVisible(false);
         navMenus.findItem(R.id.nav_log_out).setVisible(true);

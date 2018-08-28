@@ -22,12 +22,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/imageViewProfileImg"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:srcCompat="@drawable/ic_placeholder" />
 
         <Button
+            android:visibility="invisible"
             android:id="@+id/buttonProfileOKPicture"
             style="@style/ButtonThemeOk"
             android:layout_width="match_parent"

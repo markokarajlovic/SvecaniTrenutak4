@@ -26,7 +26,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ephoenixdev.svecanitrenutak.models.ImageUpload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +34,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ephoenixdev.svecanitrenutak.models.AdModel;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
@@ -199,7 +197,13 @@ public class NewAdActivity extends AppCompatActivity
             idAd = databaseAd.push().getKey();
             String idUser = currentUser.getUid().toString();
             String titleOfAd = EditTitleOfAd.getText().toString().trim();
-            String imageOfAd = "ad_image_1." + getFileExtension(mImageUri);
+            String imageOfAd;
+            if(mImageUri != null){
+                imageOfAd = "ad_image_1." + getFileExtension(mImageUri);
+            }else
+            {
+                imageOfAd = "";
+            }
             String categoryOfAd = spinnerCategories.getSelectedItem().toString();
             String discriptionOfAd = EditDiscriptionOfAd.getText().toString().trim();
             String cityOfAd = EditCityOfAd.getText().toString().trim();
@@ -241,7 +245,7 @@ public class NewAdActivity extends AppCompatActivity
             startActivity(intent);
         }
         else{
-            Toast.makeText(NewAdActivity.this, "Neuspesno!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(NewAdActivity.this, "Neuspesno postavljanje oglasa!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -327,6 +331,7 @@ public class NewAdActivity extends AppCompatActivity
             mAuth.signOut();
             resetUI();
             Toast.makeText(NewAdActivity.this, "Izlogovani ste", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
 
         } else if (id == R.id.nav_about_us) {
             Intent intent = new Intent(this,AboutUsActivity.class);
@@ -338,6 +343,7 @@ public class NewAdActivity extends AppCompatActivity
             String text = getResources().getString(R.string.share_text);
             intent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
             intent.putExtra(Intent.EXTRA_TEXT, text);
+
             startActivity(Intent.createChooser(intent, "Izaberite"));
 
         } else if (id == R.id.nav_follow_us) {
@@ -372,7 +378,7 @@ public class NewAdActivity extends AppCompatActivity
 
     private void updateUI(FirebaseUser currentUser) {
 
-        //navMenus.findItem(R.id.nav_profile).setVisible(true);
+        navMenus.findItem(R.id.nav_profile).setVisible(true);
         navMenus.findItem(R.id.nav_log_in).setVisible(false);
         navMenus.findItem(R.id.nav_new_account).setVisible(false);
         navMenus.findItem(R.id.nav_log_out).setVisible(true);

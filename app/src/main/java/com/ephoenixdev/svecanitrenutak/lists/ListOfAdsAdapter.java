@@ -96,14 +96,14 @@ public class ListOfAdsAdapter extends RecyclerView.Adapter<ListOfAdsAdapter.AdVi
             int position = getAdapterPosition();
             AdModel adModel = this.adModelList.get(position);
             Intent intent = new Intent(this.ctx, ViewAdActivity.class);
-            intent.putExtra("userId",adModel.getUserID());
+            intent.putExtra("userId",adModel.getUid());
             intent.putExtra("adId",adModel.getAdId());
             intent.putExtra("title",adModel.getTitle());
             intent.putExtra("city",adModel.getAddress());
             intent.putExtra("discription",adModel.getDescription());
             intent.putExtra("fbURL",adModel.getFbURL());
             intent.putExtra("instagramURL",adModel.getInstagramURL());
-            intent.putExtra("youtubeURL",adModel.getYouTubeURL());
+            intent.putExtra("youtubeURL",adModel.getYoutubeURL());
             intent.putExtra("webSite",adModel.getPersonalWebSite());
             intent.putExtra("adress",adModel.getAddress());
             intent.putExtra("category", adModel.getCategory());

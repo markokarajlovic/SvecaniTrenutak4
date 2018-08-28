@@ -20,12 +20,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="TextView"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewListItemAds"
+        app:layout_constraintStart_toEndOf="@+id/imageViewListItemAds2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -42,6 +45,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewListItemAds2"
-        app:layout_constraintTop_toBottomOf="@+id/textViewListItemAdsTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewListItemAdsTitle2" />
 
 </android.support.constraint.ConstraintLayout>

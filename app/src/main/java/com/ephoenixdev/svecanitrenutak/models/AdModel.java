@@ -5,13 +5,13 @@ import java.util.Date;
 public class AdModel {
 
     private String adId;
-    private String userID;
+    private String uid;
     private String title;
     private String category;
     private String description;
     private String cityOfAd;
     private String address;
-    private String youTubeURL;
+    private String youtubeURL;
     private String fbURL;
     private String instagramURL;
     private String personalWebSite;
@@ -24,25 +24,25 @@ public class AdModel {
 
     // bez datuma
     public AdModel(String adId,
-                   String userID,
+                   String uid,
                    String title,
                    String imageOfTheAd,
                    String category,
                    String description,
                    String cityOfAd,
                    String address,
-                   String youTubeURL,
+                   String youtubeURL,
                    String fbURL,
                    String instagramURL,
                    String personalWebSite) {
         this.adId = adId;
-        this.userID = userID;
+        this.uid = uid;
         this.title = title;
         this.category = category;
         this.description = description;
         this.cityOfAd = cityOfAd;
         this.address = address;
-        this.youTubeURL = youTubeURL;
+        this.youtubeURL = youtubeURL;
         this.fbURL = fbURL;
         this.instagramURL = instagramURL;
         this.personalWebSite = personalWebSite;
@@ -57,12 +57,12 @@ public class AdModel {
         this.adId = adId;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUid() {
+        return uid;
     }
 
-    public void setUserID(String uid) {
-        this.userID = uid;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getTitle() {
@@ -97,12 +97,12 @@ public class AdModel {
         this.address = address;
     }
 
-    public String getYouTubeURL() {
-        return youTubeURL;
+    public String getYoutubeURL() {
+        return youtubeURL;
     }
 
-    public void setYouTubeURL(String youTubeURL) {
-        this.youTubeURL = youTubeURL;
+    public void setYoutubeURL(String youtubeURL) {
+        this.youtubeURL = youtubeURL;
     }
 
     public String getFbURL() {

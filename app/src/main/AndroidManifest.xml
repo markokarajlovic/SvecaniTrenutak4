@@ -62,7 +62,9 @@
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UserAdsActivity"></activity>
+        <activity
+            android:name=".UserAdsActivity"
+            android:label="@string/moji_oglasi" />
     </application>
 
 </manifest>
