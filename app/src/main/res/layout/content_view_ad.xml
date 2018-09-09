@@ -63,6 +63,7 @@
                 android:id="@+id/imageViewViewAd"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:layout_marginTop="@dimen/nav_header_vertical_spacing"
                 app:srcCompat="@drawable/side_nav_bar" />
 
             <TextView
@@ -70,6 +71,7 @@
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/nav_header_vertical_spacing"
                 android:gravity="center"
                 android:text="Opis Oglasa"
                 android:textAlignment="center"
@@ -80,14 +82,37 @@
                 style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
+                android:background="#94e1ec"
                 android:gravity="top|left"
+                android:padding="@dimen/nav_header_vertical_spacing"
                 android:textAlignment="gravity" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/nav_header_vertical_spacing"
+                    android:src="@drawable/ic_phone" />
+
+                <TextView
+                    android:id="@+id/textViewViewAdPhone"
+                    style="@style/TextAppearance.MaterialComponents.Headline5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/nav_header_vertical_spacing" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/buttonViewAdDelete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:background="@android:color/holo_red_dark"
                 android:text="Obrisi Oglas !"
                 android:textColor="@android:color/background_dark"

@@ -41,7 +41,7 @@ public class ViewAdActivity extends AppCompatActivity
     FirebaseUser currentUser;
     public Menu navMenus;
     public View headerLayout;
-    private TextView viewTitle, viewDiscription;
+    private TextView viewTitle, viewDiscription, viewPhone;
     private ImageView imageView;
     private Button btnInstagram, btnYoutube, btnFacebook, btnReport, btnCity, btnCall, btnWebsite, btnShare, btnDelete;
     private FirebaseAuth mAuth;
@@ -75,6 +75,7 @@ public class ViewAdActivity extends AppCompatActivity
 
         viewTitle = findViewById(R.id.textViewViewAdTitle);
         viewDiscription = findViewById(R.id.textViewViewAdDiscription);
+        viewPhone = findViewById(R.id.textViewViewAdPhone);
         btnInstagram = findViewById(R.id.buttonViewAdInstagram);
         btnYoutube = findViewById(R.id.buttonViewAdYoutube);
         btnFacebook = findViewById(R.id.buttonViewAdFacebook);
@@ -90,6 +91,7 @@ public class ViewAdActivity extends AppCompatActivity
         title = getIntent().getStringExtra("title");
         city = getIntent().getStringExtra("city");
         discription = getIntent().getStringExtra("discription");
+        phone = getIntent().getStringExtra("phone");
         fbURL = getIntent().getStringExtra("fbURL");
         instgramURL = getIntent().getStringExtra("instgramURL");
         youtubeURL = getIntent().getStringExtra("youtubeURL");
@@ -100,6 +102,7 @@ public class ViewAdActivity extends AppCompatActivity
 
         viewTitle.setText(title);
         viewDiscription.setText(discription);
+        viewPhone.setText(phone);
 
 
         setImageOfAd (adId, imageOfAd);
@@ -148,10 +151,16 @@ public class ViewAdActivity extends AppCompatActivity
             }
         });
 
+        viewPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                makePhoneCall(viewPhone.getText().toString().trim());
+            }
+        });
         btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                makePhoneCall();
+                //makePhoneCall();
             }
         });
 
@@ -185,8 +194,8 @@ public class ViewAdActivity extends AppCompatActivity
         }
     }
 
-    private void makePhoneCall() {
-            String number = "0643609543";
+    private void makePhoneCall(String number) {
+
             if (number.trim().length() > 0) {
 
                 if (ContextCompat.checkSelfPermission(this,
@@ -207,7 +216,7 @@ public class ViewAdActivity extends AppCompatActivity
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CALL) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                makePhoneCall();
+                makePhoneCall(viewPhone.getText().toString().trim());
             } else {
                 Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
             }

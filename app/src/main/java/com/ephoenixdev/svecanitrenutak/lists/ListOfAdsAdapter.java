@@ -101,6 +101,7 @@ public class ListOfAdsAdapter extends RecyclerView.Adapter<ListOfAdsAdapter.AdVi
             intent.putExtra("title",adModel.getTitle());
             intent.putExtra("city",adModel.getAddress());
             intent.putExtra("discription",adModel.getDescription());
+            intent.putExtra("phone", adModel.getPhoneNubmer());
             intent.putExtra("fbURL",adModel.getFbURL());
             intent.putExtra("instagramURL",adModel.getInstagramURL());
             intent.putExtra("youtubeURL",adModel.getYoutubeURL());
