@@ -69,7 +69,7 @@ public class UserAdsActivity extends AppCompatActivity {
             }
         };
 
-        Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("userID").equalTo(userId);
+        Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("uid").equalTo(userId);
         query.addListenerForSingleValueEvent(valueEventListener);
 
         recyclerView.setOnClickListener(new View.OnClickListener() {
