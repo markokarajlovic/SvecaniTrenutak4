@@ -1,5 +1,6 @@
 package com.ephoenixdev.svecanitrenutak;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,11 @@ public class CategoriesActivity extends AppCompatActivity
 
     public Menu navMenus;
     public View headerLayout;
+    Dialog dialog;
+    int idSubCategory = 0;
+
+    RadioButton radio1,radio2,radio3,radio4,radio5;
+    RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +63,10 @@ public class CategoriesActivity extends AppCompatActivity
         navMenus = navigationView.getMenu();
         headerLayout = navigationView.getHeaderView(0);
 
+        dialog = new Dialog(this);
         mAuth = FirebaseAuth.getInstance();
 
         createList();
-
-
-
     }
 
     @Override
@@ -80,16 +86,94 @@ public class CategoriesActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+
                 int positionOfClick = position + 1;
-
                 Intent intent = new Intent(CategoriesActivity.this,ListOfAdsActivity.class);
-                intent.putExtra("idCategory", positionOfClick);
-                startActivity(intent);
 
+                intent.putExtra("idCategory", positionOfClick);
+
+                if(positionOfClick ==1){
+                    showPopup(positionOfClick);
+                }else if(positionOfClick==5){
+                    showPopup(positionOfClick);
+                }else {
+                    startActivity(intent);
+                }
             }
         });
 
     }
+
+    public void showPopup(int i){
+
+
+        final Intent intent1 = new Intent(CategoriesActivity.this,ListOfAdsActivity.class);
+
+        dialog.setContentView(R.layout.popout_subcategory);
+        radioGroup = dialog.findViewById(R.id.radioGroupPopup);
+        radio1 = dialog.findViewById(R.id.radioButtonPopup1);
+        radio2 = dialog.findViewById(R.id.radioButtonPopup2);
+        radio3 = dialog.findViewById(R.id.radioButtonPopup3);
+        radio4 = dialog.findViewById(R.id.radioButtonPopup4);
+        radio5 = dialog.findViewById(R.id.radioButtonPopup5);
+
+        if(i == 1){
+
+            intent1.putExtra("idCategory", 1);
+            radio5.setVisibility(View.VISIBLE);
+            radio1.setText(getResources().getString(R.string.sub11));
+            radio2.setText(getResources().getString(R.string.sub12));
+            radio3.setText(getResources().getString(R.string.sub13));
+            radio4.setText(getResources().getString(R.string.sub14));
+            radio5.setText(getResources().getString(R.string.sub15));
+
+        }
+        else if(i ==5){
+            intent1.putExtra("idCategory", 5);
+            radio5.setVisibility(View.GONE);
+            radio1.setText(getResources().getString(R.string.sub51));
+            radio2.setText(getResources().getString(R.string.sub52));
+            radio3.setText(getResources().getString(R.string.sub53));
+            radio4.setText(getResources().getString(R.string.sub54));
+        }
+
+        dialog.show();
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.radioButtonPopup1){
+                    idSubCategory = 1;
+                    intent1.putExtra("idSubCategory", idSubCategory);
+                }
+
+                if(checkedId == R.id.radioButtonPopup2){
+                    idSubCategory = 2;
+                    intent1.putExtra("idSubCategory", idSubCategory);
+                }
+
+                if(checkedId == R.id.radioButtonPopup3){
+                    idSubCategory = 3;
+                    intent1.putExtra("idSubCategory", idSubCategory);
+                }
+
+                if(checkedId == R.id.radioButtonPopup4){
+                    idSubCategory = 4;
+                    intent1.putExtra("idSubCategory", idSubCategory);
+                }
+
+                if(checkedId == R.id.radioButtonPopup5){
+                    idSubCategory = 5;
+                    intent1.putExtra("idSubCategory", idSubCategory);
+                }
+
+                startActivity(intent1);
+                dialog.dismiss();
+            }
+        });
+
+    }
+
 
     @Override
     public void onStart() {

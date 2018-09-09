@@ -9,6 +9,7 @@ public class AdModel {
     private String title;
     private String category;
     private String description;
+    private String phoneNubmer;
     private String cityOfAd;
     private String address;
     private String youtubeURL;
@@ -29,6 +30,7 @@ public class AdModel {
                    String imageOfTheAd,
                    String category,
                    String description,
+                   String phoneNubmer,
                    String cityOfAd,
                    String address,
                    String youtubeURL,
@@ -40,6 +42,7 @@ public class AdModel {
         this.title = title;
         this.category = category;
         this.description = description;
+        this.phoneNubmer = phoneNubmer;
         this.cityOfAd = cityOfAd;
         this.address = address;
         this.youtubeURL = youtubeURL;
@@ -160,5 +163,13 @@ public class AdModel {
 
     public void setImageOfTheAd(String imageOfTheAd) {
         this.imageOfTheAd = imageOfTheAd;
+    }
+
+    public String getPhoneNubmer() {
+        return phoneNubmer;
+    }
+
+    public void setPhoneNubmer(String phoneNubmer) {
+        this.phoneNubmer = phoneNubmer;
     }
 }

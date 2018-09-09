@@ -7,37 +7,56 @@
     <string name="nav_header_desc">Svečani Trenutak</string>
     <string name="action_settings">Podešavanja</string>
 
-    <string name="K_1">Muzika - Bendovi/Orkestri</string>
-    <string name="K_2">Muzika - DJ-evi</string>
-    <string name="K_3">Muzika - Pevači</string>
-    <string name="K_4">Muzika - Tamburaši/Akustičari</string>
-    <string name="K_5">Muzika - Trubači</string>
-    <string name="K_6">Svečane sale/Restorani</string>
-    <string name="K_7">Venčanice/Svečane haljine</string>
-    <string name="K_8">Dekoracija i specijalni efekti</string>
-    <string name="K_9">Torte/Slatkiši</string>
-    <string name="K_10">Foto/Video</string>
-    <string name="K_11">Šatori/Paviljoni</string>
-    <string name="K_12">Pozivnice/Štampa</string>
-    <string name="K_13">Lepota - Frizura</string>
-    <string name="K_14">Lepota - Makeup</string>
-    <string name="K_15">Lepota - Nokti</string>
-    <string name="K_16">Lepota - Studio lepote</string>
-    <string name="K_17">Prevoz</string>
-    <string name="K_18">Osoblje</string>
-    <string name="K_19">Prenoćište za goste</string>
-    <string name="K_20">Burme/Nakit</string>
-    <string name="K_21">Aksesoar</string>
-    <string name="K_22">Ketering</string>
-    <string name="K_23">Poklončići</string>
-    <string name="K_24">Pića</string>
-    <string name="K_25">Igraonice</string>
-    <string name="K_26">Muška i dečija odela</string>
-    <string name="K_27">Venčanice/Svečane haljine</string>
-    <string name="K_28">Obuća</string>
-    <string name="K_29">Animacija</string>
-    <string name="K_30">Organizatori proslave</string>
-    <string name="K_31">Ostalo</string>
+    <string name="K_1">Muzika</string>
+    <string name="K_2">Svečane sale/Restorani</string>
+    <string name="K_3">Dekoracija i specijalni efekti</string>
+    <string name="K_4">Foto/Video</string>
+    <string name="K_5">Lepota</string>
+    <string name="K_6">Burme/Nakit</string>
+    <string name="K_7">Torte/Slatkiši</string>
+    <string name="K_8">Ketering</string>
+    <string name="K_9">Pića</string>
+    <string name="K_10">Venčanice/Svečane haljine</string>
+    <string name="K_11">Muška i dečija odela</string>
+    <string name="K_12">Aksesoar</string>
+    <string name="K_13">Obuća</string>
+    <string name="K_14">Pozivnice/Štampa</string>
+    <string name="K_15">Šatori/Paviljoni</string>
+    <string name="K_16">Prevoz</string>
+    <string name="K_17">Prenoćište za goste</string>
+    <string name="K_18">Časovi plesa</string>
+    <string name="K_19">Igraonice</string>
+    <string name="K_20">Animacija</string>
+    <string name="K_21">Osoblje</string>
+    <string name="K_22">Poklončići</string>
+    <string name="K_23">Organizatori proslave</string>
+    <string name="K_24">Ostalo</string>
+
+    <string name="sub11">Muzika - Bendovi/Orkestri</string>
+    <string name="sub12">Muzika - DJ-evi</string>
+    <string name="sub13">Muzika - Pevači</string>
+    <string name="sub14">Muzika - Tamburaši/Akustičari</string>
+    <string name="sub15">Muzika - Trubači</string>
+
+    <string name="sub51">Lepota - Frizura</string>
+    <string name="sub52">Lepota - Makeup</string>
+    <string name="sub53">Lepota - Nokti</string>
+    <string name="sub54">Lepota - Studio lepote</string>
+
+    <string-array name="Muzika">
+        <item>Muzika - Bendovi/Orkestri</item>
+        <item>Muzika - DJ-evi</item>
+        <item>Muzika - Pevači</item>
+        <item>Muzika - Tamburaši/Akustičari</item>
+        <item>Muzika - Trubači</item>
+    </string-array>
+
+    <string-array name="Lepota">
+        <item>Lepota - Frizura</item>
+        <item>Lepota - Makeup</item>
+        <item>Lepota - Nokti</item>
+        <item>Lepota - Studio lepote</item>
+    </string-array>
 
     <string name="title_activity_log_in">Prijava</string>
     <string name="title_activity_register">Kreiranje Novog Naloga</string>
@@ -54,7 +73,7 @@
         restoranima, muzici, salonima venčanica i svemu ostalom su pred Vama. Olakšajte pripremu Vaše proslave i u njoj uživajte uz nas.</string>
     <string name="aboutus3">Vaš Svečani trenutak</string>
 
-    <string name="contact1">E-mail: markokarajlovic@gmail.com</string>
+    <string name="contact1">E-mail: svecanitrenutak@gmail.com</string>
 
     <string-array name="categories">
         <item>Muzika - Bendovi/Orkestri</item>
@@ -63,29 +82,29 @@
         <item>Muzika - Tamburaši/Akustičari</item>
         <item>Muzika - Trubači</item>
         <item>Svečane sale/restorani</item>
-        <item>Venčanice/Svečane haljine</item>
-        <item>Dekoracija</item>
-        <item>Torte/Slatkiši</item>
+        <item>Dekoracija i specijalni efekti</item>
         <item>Foto/Video</item>
-        <item>Šatori/Paviljoni</item>
-        <item>Pozivnice/Štampa</item>
         <item>Lepota - Frizura</item>
         <item>Lepota - Makeup</item>
         <item>Lepota - Nokti</item>
         <item>Lepota - Studio lepote</item>
-        <item>Prevoz</item>
-        <item>Osoblje</item>
-        <item>Prenoćište za goste</item>
         <item>Burme/Nakit</item>
-        <item>Aksesoar</item>
+        <item>Torte/Slatkiši</item>
         <item>Ketering</item>
-        <item>Poklončići</item>
         <item>Pića</item>
-        <item>Igraonice</item>
-        <item>Muška i dečija odela</item>
         <item>Venčanice/Svečane haljine</item>
+        <item>Muška i dečija odela</item>
+        <item>Aksesoar</item>
         <item>Obuća</item>
+        <item>Pozivnice/Štampa</item>
+        <item>Šatori/Paviljoni</item>
+        <item>Prevoz</item>
+        <item>Prenoćište za goste</item>
+        <item>Časovi plesa</item>
+        <item>Igraonice</item>
         <item>Animacija</item>
+        <item>Osoblje</item>
+        <item>Poklončići</item>
         <item>Organizatori proslave</item>
         <item>Ostalo</item>
     </string-array>
@@ -137,4 +156,5 @@
     <string name="potvrdite_promene">Potvrdite promene</string>
     <string name="promenite_sliku">Promenite sliku</string>
     <string name="moji_oglasi">Moji Oglasi</string>
+    <string name="main_4">Aplikacija je u konstantom razvoju, za sve sugestije i primedbe molim Vas pišite nam na: svecanitrenutak@gmail.com</string>
 </resources>

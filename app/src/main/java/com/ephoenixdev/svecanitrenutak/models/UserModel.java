@@ -3,7 +3,6 @@ package com.ephoenixdev.svecanitrenutak.models;
 public class UserModel {
 
         private String uid;
-        private String phoneNumber;
         private boolean isAdmin;
         private String profileImageName;
 
@@ -11,19 +10,10 @@ public class UserModel {
 
         }
 
-    public UserModel(String uid, String phoneNumber, boolean isAdmin, String profileImageName) {
+    public UserModel(String uid, boolean isAdmin, String profileImageName) {
         this.uid = uid;
-        this.phoneNumber = phoneNumber;
         this.isAdmin = isAdmin;
         this.profileImageName = profileImageName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public boolean isAdmin() {

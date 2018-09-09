@@ -55,6 +55,7 @@ public class NewAdActivity extends AppCompatActivity
     private EditText EditTitleOfAd;
     private Spinner spinnerCategories;
     private EditText EditDiscriptionOfAd;
+    private EditText EditPhoneNumberOfAd;
     private EditText EditCityOfAd;
     private EditText EditAddressOfAd;
     private EditText EditYoutubeLinkOfAd;
@@ -98,6 +99,7 @@ public class NewAdActivity extends AppCompatActivity
         EditTitleOfAd = findViewById(R.id.editTextNewAdTitle);
         spinnerCategories = findViewById(R.id.spinnerNewAdCategory);
         EditDiscriptionOfAd = findViewById(R.id.editTextNewAdDiscription);
+        EditPhoneNumberOfAd = findViewById(R.id.editTextNewAdPhone);
         EditCityOfAd = findViewById(R.id.editTextNewAdCity);
         EditAddressOfAd = findViewById(R.id.editTextNewAdAdress);
         EditYoutubeLinkOfAd = findViewById(R.id.editTextNewAdYouTube);
@@ -206,6 +208,7 @@ public class NewAdActivity extends AppCompatActivity
             }
             String categoryOfAd = spinnerCategories.getSelectedItem().toString();
             String discriptionOfAd = EditDiscriptionOfAd.getText().toString().trim();
+            String phoneNumberOfAd = EditPhoneNumberOfAd.getText().toString().trim();
             String cityOfAd = EditCityOfAd.getText().toString().trim();
             String addressOfAd = EditAddressOfAd.getText().toString().trim();
             String youtubeLinkOfAd = EditYoutubeLinkOfAd.getText().toString().trim();
@@ -220,6 +223,7 @@ public class NewAdActivity extends AppCompatActivity
                     imageOfAd,
                     categoryOfAd,
                     discriptionOfAd,
+                    phoneNumberOfAd,
                     cityOfAd,
                     addressOfAd,
                     youtubeLinkOfAd,

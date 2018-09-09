@@ -48,7 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editTextPassword1;
     private ProgressBar progressBar;
     private Button btnLogIn;
-    private EditText editTextPhone;
     private ImageView imageViewProfileImg;
     private Button btnFacebook;
     private Button btnGoogle;
@@ -72,7 +71,6 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPassword1 = findViewById(R.id.editTextRegPassword1);
         progressBar = findViewById(R.id.progressBarReg);
         btnLogIn = findViewById(R.id.buttonRegLogIn);
-        editTextPhone = findViewById(R.id.editTextRegPhone);
         imageViewProfileImg = findViewById(R.id.imageViewRegProfileImg);
 
         // TODO implementirati opcije za registraciju pomocu google i facebook
@@ -236,7 +234,6 @@ public class RegisterActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
         databaseUser = FirebaseDatabase.getInstance().getReference("User");
 
-        String phoneNumber = editTextPhone.getText().toString();
         String profileImage;
         boolean isAdmin = false;
         if (mImageUri != null) {
@@ -246,7 +243,7 @@ public class RegisterActivity extends AppCompatActivity {
         {
             profileImage = "";
         }
-        UserModel um = new UserModel(currentUser.getUid().toString(),phoneNumber,isAdmin, profileImage);
+        UserModel um = new UserModel(currentUser.getUid().toString(),isAdmin, profileImage);
         databaseUser.child(currentUser.getUid()).setValue(um);
 
     }

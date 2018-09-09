@@ -54,6 +54,7 @@ public class ListOfAdsActivity extends AppCompatActivity
     String categoryName;
 
     long idCategory;
+    int idSubCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,7 @@ public class ListOfAdsActivity extends AppCompatActivity
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null){
             idCategory = bundle.getInt("idCategory");
+            idSubCategory = bundle.getInt("idSubCategory");
         }
 
         ValueEventListener valueEventListener = new ValueEventListener() {
@@ -127,15 +129,27 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         if (idCategory == 1) {
 
-            // Muzika - Bendovi/Orkestri
-            categoryName = getResources().getString(R.string.K_1);
+            // Muzika
+
+            if(idSubCategory == 1){
+                categoryName = getResources().getString(R.string.sub11);
+            }else if(idSubCategory == 2){
+                categoryName = getResources().getString(R.string.sub12);
+            }else if(idSubCategory == 3){
+                categoryName = getResources().getString(R.string.sub13);
+            }else if(idSubCategory == 4){
+                categoryName = getResources().getString(R.string.sub14);
+            }else if(idSubCategory == 5){
+                categoryName = getResources().getString(R.string.sub15);
+            }
+
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
             query.addListenerForSingleValueEvent(valueEventListener);
 
         } else if (idCategory == 2) {
 
-            // Muzika - DJ-evi
+            // Svečane sale/Restorani
             categoryName = getResources().getString(R.string.K_2);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -143,7 +157,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 3) {
 
-            // Muzika - Pevači
+            // Dekoracija i specijalni efekti
             categoryName = getResources().getString(R.string.K_3);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -151,7 +165,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 4) {
 
-            // Muzika - Tamburaši/Akustičari
+            // Foto/Video
             categoryName = getResources().getString(R.string.K_4);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -159,15 +173,25 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 5) {
 
-            // Muzika - Trubači
-            categoryName = getResources().getString(R.string.K_5);
+            // Lepota
+
+            if(idSubCategory == 1){
+                categoryName = getResources().getString(R.string.sub51);
+            }else if(idSubCategory == 2){
+                categoryName = getResources().getString(R.string.sub52);
+            }else if(idSubCategory == 3){
+                categoryName = getResources().getString(R.string.sub53);
+            }else if(idSubCategory == 4){
+                categoryName = getResources().getString(R.string.sub54);
+            }
+
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
             query.addListenerForSingleValueEvent(valueEventListener);
 
         } else if (idCategory == 6) {
 
-            // Svečane sale/Restorani
+            // Burme/Nakit
             categoryName = getResources().getString(R.string.K_6);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -175,7 +199,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 7) {
 
-            // Venčanice/Svečane haljine
+            // Torte/Slatkiši
             categoryName = getResources().getString(R.string.K_7);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -183,7 +207,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 8) {
 
-            // Dekoracija i specijalni efekti
+            // Ketering
             categoryName = getResources().getString(R.string.K_8);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -191,7 +215,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 9) {
 
-            // Torte/Slatkiši
+            // Pića
             categoryName = getResources().getString(R.string.K_9);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -199,7 +223,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 10) {
 
-            // Foto/Video
+            // Venčanice/Svečane haljine
             categoryName = getResources().getString(R.string.K_10);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -207,7 +231,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 11) {
 
-            // Šatori/Paviljoni
+            // Muška i dečija odela
             categoryName = getResources().getString(R.string.K_11);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -215,7 +239,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 12) {
 
-            // Pozivnice/Štampa
+            // Aksesoar
             categoryName = getResources().getString(R.string.K_12);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -223,7 +247,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 13) {
 
-            // Lepota - Frizura
+            // Obuća
             categoryName = getResources().getString(R.string.K_13);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -231,7 +255,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 14) {
 
-            // Lepota - Makeup
+            // Pozivnice/Štampa
             categoryName = getResources().getString(R.string.K_14);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -239,7 +263,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 15) {
 
-            // Lepota - Nokti
+            // Šatori/Paviljoni
             categoryName = getResources().getString(R.string.K_15);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -247,7 +271,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 16) {
 
-            // Lepota - Studio lepote
+            // Prevoz
             categoryName = getResources().getString(R.string.K_16);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -255,7 +279,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 17) {
 
-            // Prevoz
+            // Prenoćište za goste
             categoryName = getResources().getString(R.string.K_17);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -263,7 +287,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 18) {
 
-            // Osoblje
+            // Časovi plesa
             categoryName = getResources().getString(R.string.K_18);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -271,7 +295,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 19) {
 
-            // Prenoćište za goste
+            // Igraonice
             categoryName = getResources().getString(R.string.K_19);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -279,7 +303,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 20) {
 
-            // Burme/Nakit
+            // Animacija
             categoryName = getResources().getString(R.string.K_20);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -287,7 +311,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 21) {
 
-            // Aksesoar
+            // Osoblje
             categoryName = getResources().getString(R.string.K_21);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -295,7 +319,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         } else if (idCategory == 22) {
 
-            // Ketering
+            // Poklončići
             categoryName = getResources().getString(R.string.K_22);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -303,7 +327,7 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         }else if (idCategory == 23) {
 
-            // Poklončići
+            // Organizatori proslave
             categoryName = getResources().getString(R.string.K_23);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
@@ -311,64 +335,8 @@ public class ListOfAdsActivity extends AppCompatActivity
 
         }else if (idCategory == 24) {
 
-            // Pića
-            categoryName = getResources().getString(R.string.K_24);
-            getSupportActionBar().setTitle(categoryName);
-            Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
-            query.addListenerForSingleValueEvent(valueEventListener);
-
-        }else if (idCategory == 25) {
-
-            // Igraonice
-            categoryName = getResources().getString(R.string.K_25);
-            getSupportActionBar().setTitle(categoryName);
-            Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
-            query.addListenerForSingleValueEvent(valueEventListener);
-
-        }else if (idCategory == 26) {
-
-            // Muška i dečija odela
-            categoryName = getResources().getString(R.string.K_26);
-            getSupportActionBar().setTitle(categoryName);
-            Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
-            query.addListenerForSingleValueEvent(valueEventListener);
-
-        }else if (idCategory == 27) {
-
-            // Venčanice/Svečane haljine
-            categoryName = getResources().getString(R.string.K_27);
-            getSupportActionBar().setTitle(categoryName);
-            Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
-            query.addListenerForSingleValueEvent(valueEventListener);
-
-        }else if (idCategory == 28) {
-
-            // Obuća
-            categoryName = getResources().getString(R.string.K_28);
-            getSupportActionBar().setTitle(categoryName);
-            Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
-            query.addListenerForSingleValueEvent(valueEventListener);
-
-        }else if (idCategory == 29) {
-
-            // Animacija
-            categoryName = getResources().getString(R.string.K_29);
-            getSupportActionBar().setTitle(categoryName);
-            Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
-            query.addListenerForSingleValueEvent(valueEventListener);
-
-        }else if (idCategory == 30) {
-
-            // Organizatori proslave
-            categoryName = getResources().getString(R.string.K_30);
-            getSupportActionBar().setTitle(categoryName);
-            Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
-            query.addListenerForSingleValueEvent(valueEventListener);
-
-        }else if (idCategory == 31) {
-
             // Ostalo
-            categoryName = getResources().getString(R.string.K_31);
+            categoryName = getResources().getString(R.string.K_24);
             getSupportActionBar().setTitle(categoryName);
             Query query = FirebaseDatabase.getInstance().getReference("Ad").orderByChild("category").equalTo(categoryName);
             query.addListenerForSingleValueEvent(valueEventListener);
