@@ -6,7 +6,7 @@ android {
         applicationId "com.ephoenixdev.svecanitrenutak"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 4
+        versionCode 5
         versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
     implementation 'com.android.support:support-v4:28.0.0-rc01'
     implementation 'com.android.support:design:28.0.0-rc01'
@@ -34,6 +34,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crash:16.0.1'
     implementation 'com.firebaseui:firebase-ui-storage:4.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.android.support:recyclerview-v7:28.0.0-rc01'
 }
 
 apply plugin: 'com.google.gms.google-services'

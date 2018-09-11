@@ -1,6 +1,7 @@
 package com.ephoenixdev.svecanitrenutak.lists;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,7 +100,10 @@ public class CategoryAdapter extends BaseAdapter {
         ImageView imageView = convertView.findViewById(R.id.imageViewListItemCategories);
         TextView textView = convertView.findViewById(R.id.textViewListItemCategories);
 
-        imageView.setImageResource(ikoniceKategorija[position]);
+        Resources resources = context.getResources();
+
+        imageView.setImageDrawable(resources.getDrawable(ikoniceKategorija[position]));
+
         textView.setText(kategorije[position]);
         return convertView;
     }
